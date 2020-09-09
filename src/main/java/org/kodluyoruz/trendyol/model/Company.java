@@ -1,6 +1,7 @@
 package org.kodluyoruz.trendyol.model;
 
 import org.kodluyoruz.trendyol.datastructure.abstraction.EmailPackage;
+import org.kodluyoruz.trendyol.datastructure.abstraction.NotificationPackage;
 import org.kodluyoruz.trendyol.datastructure.abstraction.SmsPackage;
 
 import java.util.Date;
@@ -14,16 +15,29 @@ public class Company {
     private SmsPackage smsPackage;
     private EmailPackage emailPackage;
 
+    public Company(String name, SmsPackage smsPackage) {
+        createCompany(name);
+        this.smsPackage = smsPackage;
+    }
+
+    public Company(String name, EmailPackage emailPackage) {
+        createCompany(name);
+        this.emailPackage = emailPackage;
+    }
+
     public Company(String name, SmsPackage smsPackage, EmailPackage emailPackage) {
+        createCompany(name);
+        this.smsPackage = smsPackage;
+        this.emailPackage = emailPackage;
+    }
+
+    private void createCompany(String name) {
         this.id = new Random().nextInt(99999);
         this.name = name;
         this.createdDate = new Date();
-        this.smsPackage = smsPackage;
-        this.emailPackage = emailPackage;
 
         System.out.println(name + " company id : " + this.id + "\n");
     }
-
 
     public int getId() {
         return id;
@@ -49,7 +63,7 @@ public class Company {
         return createdDate;
     }
 
-    public SmsPackage getSmsPackage() {
+    public NotificationPackage getSmsPackage() {
         return smsPackage;
     }
 
@@ -57,7 +71,7 @@ public class Company {
         this.smsPackage = smsPackage;
     }
 
-    public EmailPackage getEmailPackage() {
+    public NotificationPackage getEmailPackage() {
         return emailPackage;
     }
 

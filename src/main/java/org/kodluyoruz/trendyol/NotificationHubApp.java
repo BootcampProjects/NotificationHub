@@ -10,13 +10,12 @@ import org.kodluyoruz.trendyol.model.Sms;
 
 public class NotificationHubApp {
     public static void main(String[] args) {
-        Company company1 = new Company("Comp1", new SmsElasticPackage(), new EmailFixedPackage());
-        Company company2 = new Company("Comp2", new SmsFixedPackage(), new EmailElasticPackage());
+        Company company1 = new Company("Comp1", new SmsElasticPackage());
+        Company company2 = new Company("Comp2", new EmailElasticPackage());
+        Company company3 = new Company("Comp3", new SmsFixedPackage(), new EmailFixedPackage());
 
-        Sms sms1 = new Sms("Hi!");
-        Sms sms2 = new Sms("Hellooo");
-
-        Email email1 = new Email("Hi!", "Greeting");
+        Sms sms1 = new Sms("Hi");
+        Email email1 = new Email("Hello", "Greeting");
 
         company1.SendSms(sms1);
         company1.SendSms(sms1);
@@ -25,32 +24,35 @@ public class NotificationHubApp {
         company1.SendSms(sms1);
         company1.SendSms(sms1);
         company1.SendSms(sms1);
-
-        System.out.println();
-
-        company1.SendEmail(email1);
-        company1.SendEmail(email1);
-        company1.SendEmail(email1);
-        company1.SendEmail(email1);
 
         System.out.println("\n\t*************\n");
 
+        company2.SendEmail(email1);
+        company2.SendEmail(email1);
+        company2.SendEmail(email1);
+        company2.SendEmail(email1);
+        company2.SendEmail(email1);
+        company2.SendEmail(email1);
 
-        company2.SendSms(sms2);
-        company2.SendSms(sms2);
-        company2.SendSms(sms2);
-        company2.SendSms(sms2);
-        company2.SendSms(sms2);
-        company2.SendSms(sms2);
-        company2.SendSms(sms2);
+        System.out.println("\n\t*************\n");
+
+        company3.SendEmail(email1);
+        company3.SendEmail(email1);
+        company3.SendEmail(email1);
 
         System.out.println();
 
-        company2.SendEmail(email1);
-        company2.SendEmail(email1);
-        company2.SendEmail(email1);
-        company2.SendEmail(email1);
-        company2.SendEmail(email1);
-        company2.SendEmail(email1);
+        company3.SendSms(sms1);
+        company3.SendSms(sms1);
+        company3.SendSms(sms1);
+        company3.SendSms(sms1);
+        company3.SendSms(sms1);
+        company3.SendSms(sms1);
+
+        System.out.println("\n\t*************\n");
+
+        System.out.printf(company1.getName() + " - invoice : %.2f\n", company1.getInvoice());
+        System.out.printf(company2.getName() + " - invoice : %.2f\n", company2.getInvoice());
+        System.out.printf(company3.getName() + " - invoice : %.2f\n", company3.getInvoice());
     }
 }
