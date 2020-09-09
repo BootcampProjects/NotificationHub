@@ -4,22 +4,24 @@ import org.kodluyoruz.trendyol.business.notification.abstraction.FixedNotificati
 import org.kodluyoruz.trendyol.datastructure.EmailFixedPackage;
 import org.kodluyoruz.trendyol.model.Company;
 import org.kodluyoruz.trendyol.model.Email;
-import org.kodluyoruz.trendyol.model.Message;
+import org.kodluyoruz.trendyol.model.dto.NotificationSendDTO;
 
 public class EmailFixedNotificationSender implements FixedNotificationSender {
     @Override
-    public void SendNotification(Company company, Message message) {
-        Email email = (Email) message;
+    public void SendNotification(NotificationSendDTO notificationSendDTO) {
+        Email email = (Email) notificationSendDTO.getMessage();
+        Company company = notificationSendDTO.getCompany();
 
         if (company.getEmailPackage().limit <= 0) {
             System.out.printf("\n" + company.getName() + " - exceeded Email limit (FixedPackage)" +
-                    " - invoice : %.2f \n", company.getInvoice());
+                    " - current invoice : %.2f \n", company.getInvoice());
 
             DefineExtraPackage(company);
         }
         company.getEmailPackage().limit--;
 
-        System.out.println(company.getName() + " - sent Email (FixedPackage)" +
+        System.out.println(company.getName() +
+                " - sent Email (FixedPackage) -> " + notificationSendDTO.getUserName() +
                 " - subject : " + email.getSubject() + " - content : " + email.getContent() +
                 " - remaining limit : " + company.getEmailPackage().limit);
     }
@@ -33,6 +35,6 @@ public class EmailFixedNotificationSender implements FixedNotificationSender {
 
         System.out.printf(company.getName() + " - defining extra Email package (FixedPackage)" +
                 " - new Email package limit : " + emailFixedPackage.limitExcessExtraLimit +
-                " - invoice : %.2f \n\n", company.getInvoice());
+                " - new invoice : %.2f \n\n", company.getInvoice());
     }
 }

@@ -4,9 +4,7 @@ import org.kodluyoruz.trendyol.datastructure.EmailElasticPackage;
 import org.kodluyoruz.trendyol.datastructure.EmailFixedPackage;
 import org.kodluyoruz.trendyol.datastructure.SmsElasticPackage;
 import org.kodluyoruz.trendyol.datastructure.SmsFixedPackage;
-import org.kodluyoruz.trendyol.model.Company;
-import org.kodluyoruz.trendyol.model.Email;
-import org.kodluyoruz.trendyol.model.Sms;
+import org.kodluyoruz.trendyol.model.*;
 
 public class NotificationHubApp {
     public static void main(String[] args) {
@@ -17,37 +15,29 @@ public class NotificationHubApp {
         Sms sms1 = new Sms("Hi");
         Email email1 = new Email("Hello", "Greeting");
 
-        company1.SendSms(sms1);
-        company1.SendSms(sms1);
-        company1.SendSms(sms1);
-        company1.SendSms(sms1);
-        company1.SendSms(sms1);
-        company1.SendSms(sms1);
-        company1.SendSms(sms1);
+        User user1 = new User("user1");
+        User user2 = new User("user2");
+        User user3 = new User("user3");
+        User user4 = new User("user4");
+
+        PostGroup postGroup1 = new PostGroup();
+        PostGroup postGroup2 = new PostGroup();
+        postGroup1.addUsers(user1, user2, user3, user4);
+        postGroup2.addUsers(user2, user4);
+
+        company1.SendSms(sms1, postGroup1);
 
         System.out.println("\n\t*************\n");
 
-        company2.SendEmail(email1);
-        company2.SendEmail(email1);
-        company2.SendEmail(email1);
-        company2.SendEmail(email1);
-        company2.SendEmail(email1);
-        company2.SendEmail(email1);
+        company2.SendEmail(email1, postGroup1);
 
         System.out.println("\n\t*************\n");
 
-        company3.SendEmail(email1);
-        company3.SendEmail(email1);
-        company3.SendEmail(email1);
+        company3.SendEmail(email1, postGroup1);
 
         System.out.println();
 
-        company3.SendSms(sms1);
-        company3.SendSms(sms1);
-        company3.SendSms(sms1);
-        company3.SendSms(sms1);
-        company3.SendSms(sms1);
-        company3.SendSms(sms1);
+        company3.SendSms(sms1, postGroup2);
 
         System.out.println("\n\t*************\n");
 

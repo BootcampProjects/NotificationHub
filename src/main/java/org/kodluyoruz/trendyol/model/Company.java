@@ -3,6 +3,7 @@ package org.kodluyoruz.trendyol.model;
 import org.kodluyoruz.trendyol.datastructure.abstraction.EmailPackage;
 import org.kodluyoruz.trendyol.datastructure.abstraction.NotificationPackage;
 import org.kodluyoruz.trendyol.datastructure.abstraction.SmsPackage;
+import org.kodluyoruz.trendyol.model.dto.NotificationSendDTO;
 
 import java.util.Date;
 import java.util.Random;
@@ -85,12 +86,29 @@ public class Company {
         this.emailPackage = emailPackage;
     }
 
-    public void SendSms(Sms sms) {
-        smsPackage.notificationSender.SendNotification(this, sms);
+    public void SendSms(Sms sms, PostGroup postGroup) {
+        NotificationSendDTO notificationSendDTO = new NotificationSendDTO();
+
+        for (User user : postGroup.getUsers()) {
+            notificationSendDTO.setCompany(this);
+            notificationSendDTO.setMessage(sms);
+            notificationSendDTO.setUserName(user.getName());
+
+            smsPackage.notificationSender.SendNotification(notificationSendDTO);
+        }
+
     }
 
-    public void SendEmail(Email email) {
-        emailPackage.notificationSender.SendNotification(this, email);
+    public void SendEmail(Email email, PostGroup postGroup) {
+        NotificationSendDTO notificationSendDTO = new NotificationSendDTO();
+
+        for (User user : postGroup.getUsers()) {
+            notificationSendDTO.setCompany(this);
+            notificationSendDTO.setMessage(email);
+            notificationSendDTO.setUserName(user.getName());
+
+            emailPackage.notificationSender.SendNotification(notificationSendDTO);
+        }
     }
 
 }

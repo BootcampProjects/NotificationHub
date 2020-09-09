@@ -3,23 +3,25 @@ package org.kodluyoruz.trendyol.business.notification;
 import org.kodluyoruz.trendyol.business.notification.abstraction.FixedNotificationSender;
 import org.kodluyoruz.trendyol.datastructure.SmsFixedPackage;
 import org.kodluyoruz.trendyol.model.Company;
-import org.kodluyoruz.trendyol.model.Message;
 import org.kodluyoruz.trendyol.model.Sms;
+import org.kodluyoruz.trendyol.model.dto.NotificationSendDTO;
 
 public class SmsFixedNotificationSender implements FixedNotificationSender {
     @Override
-    public void SendNotification(Company company, Message message) {
-        Sms sms = (Sms) message;
+    public void SendNotification(NotificationSendDTO notificationSendDTO) {
+        Sms sms = (Sms) notificationSendDTO.getMessage();
+        Company company = notificationSendDTO.getCompany();
 
         if (company.getSmsPackage().limit <= 0) {
             System.out.printf("\n" + company.getName() + " - exceeded SMS limit (FixedPackage)" +
-                    " - invoice : %.2f \n", company.getInvoice());
+                    " - current invoice : %.2f \n", company.getInvoice());
 
             DefineExtraPackage(company);
         }
         company.getSmsPackage().limit--;
 
-        System.out.println(company.getName() + " - sent SMS (FixedPackage)" +
+        System.out.println(company.getName() +
+                " - sent SMS (FixedPackage) -> " + notificationSendDTO.getUserName() +
                 " - content : " + sms.getContent() +
                 " - remaining limit : " + company.getSmsPackage().limit);
     }
@@ -33,6 +35,6 @@ public class SmsFixedNotificationSender implements FixedNotificationSender {
 
         System.out.printf(company.getName() + " - defining extra SMS package (FixedPackage) " +
                 " - new SMS package limit : " + smsFixedPackage.limitExcessExtraLimit +
-                " - invoice : %.2f \n\n", company.getInvoice());
+                " - new invoice : %.2f \n\n", company.getInvoice());
     }
 }

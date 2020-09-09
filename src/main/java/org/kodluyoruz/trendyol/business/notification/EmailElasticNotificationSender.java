@@ -4,28 +4,32 @@ import org.kodluyoruz.trendyol.business.notification.abstraction.ElasticNotifica
 import org.kodluyoruz.trendyol.datastructure.EmailElasticPackage;
 import org.kodluyoruz.trendyol.model.Company;
 import org.kodluyoruz.trendyol.model.Email;
-import org.kodluyoruz.trendyol.model.Message;
+import org.kodluyoruz.trendyol.model.dto.NotificationSendDTO;
 
 public class EmailElasticNotificationSender implements ElasticNotificationSender {
     @Override
-    public void SendNotification(Company company, Message message) {
-        Email email = (Email) message;
+    public void SendNotification(NotificationSendDTO notificationSendDTO) {
+        Email email = (Email) notificationSendDTO.getMessage();
+        Company company = notificationSendDTO.getCompany();
 
         if (company.getEmailPackage().limit > 0) {
             company.getEmailPackage().limit--;
-            System.out.println(company.getName() + " - sent Email (ElasticPackage)" +
+            System.out.println(company.getName() +
+                    " - sent Email (ElasticPackage) -> " + notificationSendDTO.getUserName() +
                     " - subject : " + email.getSubject() +
                     " - content : " + email.getContent() +
                     " - remaining limit : " + company.getEmailPackage().limit);
         } else {
             System.out.printf("\n" + company.getName() + " - exceeded Email limit (ElasticPackage)" +
-                    " - invoice : %.2f \n", company.getInvoice());
+                    " - current invoice : %.2f \n", company.getInvoice());
 
             addUnitPriceToInvoice(company);
 
-            System.out.println(company.getName() + " - sent Email (ElasticPackage)" +
+            System.out.printf(company.getName() +
+                    " - sent Email (ElasticPackage) -> " + notificationSendDTO.getUserName() +
                     " - subject : " + email.getSubject() +
-                    " - content : " + email.getContent());
+                    " - content : " + email.getContent() +
+                    " - new invoice : %.2f \n", company.getInvoice());
         }
     }
 

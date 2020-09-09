@@ -1,8 +1,7 @@
 package org.kodluyoruz.trendyol.business.notification.abstraction;
 
-import org.kodluyoruz.trendyol.model.Company;
-import org.kodluyoruz.trendyol.model.Message;
+import org.kodluyoruz.trendyol.model.dto.NotificationSendDTO;
 
 public interface NotificationSender {
-    void SendNotification(Company company, Message message);
+    void SendNotification(NotificationSendDTO notificationSendDTO);
 }
