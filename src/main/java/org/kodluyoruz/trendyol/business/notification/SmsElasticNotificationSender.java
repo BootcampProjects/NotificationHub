@@ -13,11 +13,17 @@ public class SmsElasticNotificationSender implements ElasticNotificationSender {
 
         if (company.getSmsPackage().limit > 0) {
             company.getSmsPackage().limit--;
-            System.out.println(company.getName() + " send SMS (ElasticPackage) - content : " + sms.getContent() + " - remaining limit : " + company.getSmsPackage().limit);
+
+            System.out.println(company.getName() + " - sent SMS (ElasticPackage)" +
+                    " - content : " + sms.getContent() +
+                    " - remaining limit : " + company.getSmsPackage().limit);
         } else {
-            System.out.printf("\n" + company.getName() + " exceed SMS limit (ElasticPackage) - invoice : %.2f \n", company.getInvoice());
+            System.out.printf("\n" + company.getName() + " - exceeded SMS limit (ElasticPackage)" +
+                    " - invoice : %.2f \n", company.getInvoice());
+
             addUnitPriceToInvoice(company);
-            System.out.println(company.getName() + " send SMS (ElasticPackage) - content : " + sms.getContent());
+
+            System.out.println(company.getName() + " - sent SMS (ElasticPackage) - content : " + sms.getContent());
         }
     }
 

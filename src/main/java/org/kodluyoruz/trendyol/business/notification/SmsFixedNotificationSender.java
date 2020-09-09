@@ -12,11 +12,16 @@ public class SmsFixedNotificationSender implements FixedNotificationSender {
         Sms sms = (Sms) message;
 
         if (company.getSmsPackage().limit <= 0) {
-            System.out.println("\n" + company.getName() + " - exceeded SMS limit (FixedPackage) - invoice : " + company.getInvoice());
+            System.out.printf("\n" + company.getName() + " - exceeded SMS limit (FixedPackage)" +
+                    " - invoice : %.2f \n", company.getInvoice());
+
             DefineExtraPackage(company);
         }
         company.getSmsPackage().limit--;
-        System.out.println(company.getName() + " - sent SMS (FixedPackage) - content : " + sms.getContent() + " - remaining limit : " + company.getSmsPackage().limit);
+
+        System.out.println(company.getName() + " - sent SMS (FixedPackage)" +
+                " - content : " + sms.getContent() +
+                " - remaining limit : " + company.getSmsPackage().limit);
     }
 
     @Override
@@ -26,6 +31,8 @@ public class SmsFixedNotificationSender implements FixedNotificationSender {
         company.getSmsPackage().limit = smsFixedPackage.limitExcessExtraLimit;
         company.setInvoice(company.getInvoice() + smsFixedPackage.limitExcessPackagePrice);
 
-        System.out.printf(company.getName() + " - defining extra SMS package (FixedPackage) - new SMS package limit : " + smsFixedPackage.limitExcessExtraLimit + " - invoice : %.2f \n\n", company.getInvoice());
+        System.out.printf(company.getName() + " - defining extra SMS package (FixedPackage) " +
+                " - new SMS package limit : " + smsFixedPackage.limitExcessExtraLimit +
+                " - invoice : %.2f \n\n", company.getInvoice());
     }
 }

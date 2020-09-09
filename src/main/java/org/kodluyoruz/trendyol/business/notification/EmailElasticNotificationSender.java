@@ -13,17 +13,19 @@ public class EmailElasticNotificationSender implements ElasticNotificationSender
 
         if (company.getEmailPackage().limit > 0) {
             company.getEmailPackage().limit--;
-            System.out.println(company.getName() + " - sent Email (ElasticPackage)"
-                    + " - subject : " + email.getSubject()
-                    + " - content : " + email.getContent()
-                    + " - remaining limit : " + company.getEmailPackage().limit);
+            System.out.println(company.getName() + " - sent Email (ElasticPackage)" +
+                    " - subject : " + email.getSubject() +
+                    " - content : " + email.getContent() +
+                    " - remaining limit : " + company.getEmailPackage().limit);
         } else {
-            System.out.printf("\n" + company.getName() + " exceeded Email limit (ElasticPackage)"
-                    + " - invoice : %.2f \n", company.getInvoice());
+            System.out.printf("\n" + company.getName() + " - exceeded Email limit (ElasticPackage)" +
+                    " - invoice : %.2f \n", company.getInvoice());
+
             addUnitPriceToInvoice(company);
-            System.out.println(company.getName() + " sent Email (ElasticPackage)"
-                    + " - subject : " + email.getSubject()
-                    + " - content : " + email.getContent());
+
+            System.out.println(company.getName() + " - sent Email (ElasticPackage)" +
+                    " - subject : " + email.getSubject() +
+                    " - content : " + email.getContent());
         }
     }
 
