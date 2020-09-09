@@ -13,11 +13,12 @@ public class Company {
     private MessagePackage smsPackage;
     private MessagePackage emailPackage;
 
-    public Company(String name, MessagePackage smsPackage) {
+    public Company(String name, MessagePackage smsPackage, MessagePackage emailPackage) {
         this.id = new Random().nextInt(99999);
         this.name = name;
         this.createdDate = new Date();
         this.smsPackage = smsPackage;
+        this.emailPackage = emailPackage;
 
         System.out.println(name + " company id : " + this.id + "\n");
     }
@@ -65,6 +66,10 @@ public class Company {
 
     public void SendSms(Sms sms) {
         smsPackage.notificationSender.SendNotification(this, sms);
+    }
+
+    public void SendEmail(Email email) {
+        emailPackage.notificationSender.SendNotification(this, email);
     }
 
 }
