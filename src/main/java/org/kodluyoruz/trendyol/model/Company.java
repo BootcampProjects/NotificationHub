@@ -1,6 +1,7 @@
 package org.kodluyoruz.trendyol.model;
 
-import org.kodluyoruz.trendyol.datastructure.abstraction.MessagePackage;
+import org.kodluyoruz.trendyol.datastructure.abstraction.EmailPackage;
+import org.kodluyoruz.trendyol.datastructure.abstraction.SmsPackage;
 
 import java.util.Date;
 import java.util.Random;
@@ -10,10 +11,10 @@ public class Company {
     private String name;
     private double invoice;
     private Date createdDate;
-    private MessagePackage smsPackage;
-    private MessagePackage emailPackage;
+    private SmsPackage smsPackage;
+    private EmailPackage emailPackage;
 
-    public Company(String name, MessagePackage smsPackage, MessagePackage emailPackage) {
+    public Company(String name, SmsPackage smsPackage, EmailPackage emailPackage) {
         this.id = new Random().nextInt(99999);
         this.name = name;
         this.createdDate = new Date();
@@ -48,19 +49,19 @@ public class Company {
         return createdDate;
     }
 
-    public MessagePackage getSmsPackage() {
+    public SmsPackage getSmsPackage() {
         return smsPackage;
     }
 
-    public void setSmsPackage(MessagePackage smsPackage) {
+    public void setSmsPackage(SmsPackage smsPackage) {
         this.smsPackage = smsPackage;
     }
 
-    public MessagePackage getEmailPackage() {
+    public EmailPackage getEmailPackage() {
         return emailPackage;
     }
 
-    public void setEmailPackage(MessagePackage emailPackage) {
+    public void setEmailPackage(EmailPackage emailPackage) {
         this.emailPackage = emailPackage;
     }
 
