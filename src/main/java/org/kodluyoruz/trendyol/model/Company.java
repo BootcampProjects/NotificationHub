@@ -16,27 +16,33 @@ public class Company {
     private EmailPackage emailPackage;
 
     public Company(String name, SmsPackage smsPackage) {
-        createCompany(name);
+        createCompany(name, smsPackage);
         this.smsPackage = smsPackage;
     }
 
     public Company(String name, EmailPackage emailPackage) {
-        createCompany(name);
+        createCompany(name, emailPackage);
         this.emailPackage = emailPackage;
     }
 
     public Company(String name, SmsPackage smsPackage, EmailPackage emailPackage) {
-        createCompany(name);
+        createCompany(name, smsPackage, emailPackage);
         this.smsPackage = smsPackage;
         this.emailPackage = emailPackage;
     }
 
-    private void createCompany(String name) {
+    private void createCompany(String name, NotificationPackage... notificationPackages) {
         this.id = new Random().nextInt(99999);
         this.name = name;
         this.createdDate = new Date();
+        this.invoice = 0;
 
-        System.out.println(name + " company id : " + this.id + "\n");
+        for (NotificationPackage notificationPackage : notificationPackages) {
+            this.invoice += notificationPackage.packagePrice;
+        }
+
+        System.out.println(this.name + " company id : " + this.id);
+        System.out.printf(this.name + " - invoice : %.2f \n\n", this.invoice);
     }
 
     public int getId() {
