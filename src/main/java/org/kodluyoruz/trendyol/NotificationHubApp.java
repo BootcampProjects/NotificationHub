@@ -1,5 +1,6 @@
 package org.kodluyoruz.trendyol;
 
+import org.kodluyoruz.trendyol.business.payment.InvoicePayment;
 import org.kodluyoruz.trendyol.datastructure.EmailElasticPackage;
 import org.kodluyoruz.trendyol.datastructure.EmailFixedPackage;
 import org.kodluyoruz.trendyol.datastructure.SmsElasticPackage;
@@ -41,8 +42,14 @@ public class NotificationHubApp {
 
         System.out.println("\n\t*************\n");
 
+        InvoicePayment.PayInvoice(company1);
+
+        System.out.println("\n\t*************\n");
+
         System.out.printf(company1.getName() + " - invoice : %.2f\n", company1.getInvoice());
         System.out.printf(company2.getName() + " - invoice : %.2f\n", company2.getInvoice());
         System.out.printf(company3.getName() + " - invoice : %.2f\n", company3.getInvoice());
+
+
     }
 }

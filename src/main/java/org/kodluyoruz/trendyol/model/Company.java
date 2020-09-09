@@ -13,6 +13,7 @@ public class Company {
     private String name;
     private double invoice;
     private Date createdDate;
+    private Date lastPaidInvoiceDate;
     private SmsPackage smsPackage;
     private EmailPackage emailPackage;
 
@@ -36,6 +37,7 @@ public class Company {
         this.id = new Random().nextInt(99999);
         this.name = name;
         this.createdDate = new Date();
+        this.lastPaidInvoiceDate = new Date();
         this.invoice = 0;
 
         for (NotificationPackage notificationPackage : notificationPackages) {
@@ -68,6 +70,14 @@ public class Company {
 
     public Date getCreatedDate() {
         return createdDate;
+    }
+
+    public Date getLastPaidInvoiceDate() {
+        return lastPaidInvoiceDate;
+    }
+
+    public void setLastPaidInvoiceDate(Date lastPaidInvoiceDate) {
+        this.lastPaidInvoiceDate = lastPaidInvoiceDate;
     }
 
     public NotificationPackage getSmsPackage() {
