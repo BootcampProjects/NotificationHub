@@ -3,6 +3,7 @@ package org.kodluyoruz.trendyol.business.notification;
 import org.kodluyoruz.trendyol.business.notification.abstraction.ElasticNotificationSender;
 import org.kodluyoruz.trendyol.business.validation.PaymentValidation;
 import org.kodluyoruz.trendyol.datastructure.SmsElasticPackage;
+import org.kodluyoruz.trendyol.exception.InvalidPaymentException;
 import org.kodluyoruz.trendyol.model.Company;
 import org.kodluyoruz.trendyol.model.Sms;
 import org.kodluyoruz.trendyol.model.dto.NotificationSendDTO;
@@ -15,8 +16,8 @@ public class SmsElasticNotificationSender implements ElasticNotificationSender {
 
         boolean validPayment = PaymentValidation.CheckLastPaidInvoiceDate(company);
 
-        if(!validPayment)
-            // TODO : exception
+        if (!validPayment)
+            throw new InvalidPaymentException();
 
         if (company.getSmsPackage().limit > 0) {
             company.getSmsPackage().limit--;

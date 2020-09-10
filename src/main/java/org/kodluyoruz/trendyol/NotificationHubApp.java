@@ -39,11 +39,35 @@ public class NotificationHubApp {
 
         System.out.println("\n\t*************\n");
 
-        company3.SendEmail(email1, postGroup1);
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -4);
+
+        company3.setCreatedDate(cal.getTime());
+        company3.setLastPaidInvoiceDate(cal.getTime());
+
+        boolean result = PaymentValidation.CheckLastPaidInvoiceDate(company3);
+
+        System.out.println(result);
+
+
+        BlackList blackList = BlackList.getInstance();
+        List<BlackListCompanyDTO> arrayList = blackList.getBlackListCompanies();
+
+        for (BlackListCompanyDTO blackListCompanyDTO : arrayList) {
+            System.out.println(blackListCompanyDTO.getCompanyName());
+        }
+
+        try {
+            company3.SendEmail(email1, postGroup1);
+            company3.SendSms(sms1, postGroup2);
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         System.out.println();
 
-        company3.SendSms(sms1, postGroup2);
 
         System.out.println("\n\t*************\n");
 
@@ -61,23 +85,6 @@ public class NotificationHubApp {
 
         System.out.println("\n\t*************\n");
 
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MONTH, -4);
-
-        company1.setCreatedDate(cal.getTime());
-        company1.setLastPaidInvoiceDate(cal.getTime());
-
-        boolean result = PaymentValidation.CheckLastPaidInvoiceDate(company1);
-
-        System.out.println(result);
-
-
-        BlackList blackList = BlackList.getInstance();
-        List<BlackListCompanyDTO> arrayList = blackList.getBlackListCompanies();
-
-        for (BlackListCompanyDTO blackListCompanyDTO : arrayList) {
-            System.out.println(blackListCompanyDTO.getCompanyName());
-        }
 
     }
 }
