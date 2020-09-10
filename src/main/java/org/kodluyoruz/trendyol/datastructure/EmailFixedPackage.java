@@ -9,9 +9,9 @@ public class EmailFixedPackage extends EmailPackage {
 
     public EmailFixedPackage() {
         super.notificationSender = new EmailFixedNotificationSender();
-        super.limit = 1;
+        super.limit = 1000;
         super.packagePrice = 10;
-        limitExcessExtraLimit = 2;
+        limitExcessExtraLimit = 1000;
         limitExcessPackagePrice = 10;
     }
 }

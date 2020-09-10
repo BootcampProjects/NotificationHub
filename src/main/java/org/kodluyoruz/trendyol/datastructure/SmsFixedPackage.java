@@ -9,9 +9,9 @@ public class SmsFixedPackage extends SmsPackage {
 
     public SmsFixedPackage() {
         super.notificationSender = new SmsFixedNotificationSender();
-        super.limit = 3;
+        super.limit = 1000;
         super.packagePrice = 20;
-        limitExcessExtraLimit = 2;
+        limitExcessExtraLimit = 1000;
         limitExcessPackagePrice = 20;
     }
 }

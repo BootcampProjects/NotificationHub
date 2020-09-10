@@ -8,7 +8,7 @@ public class SmsElasticPackage extends SmsPackage {
 
     public SmsElasticPackage() {
         super.notificationSender = new SmsElasticNotificationSender();
-        super.limit = 2;
+        super.limit = 2000;
         super.packagePrice = 30;
         limitExcessUnitPrice = 0.10;
     }

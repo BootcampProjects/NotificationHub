@@ -8,7 +8,7 @@ public class EmailElasticPackage extends EmailPackage {
 
     public EmailElasticPackage() {
         super.notificationSender = new EmailElasticNotificationSender();
-        super.limit = 2;
+        super.limit = 2000;
         super.packagePrice = 7.5;
         limitExcessUnitPrice = 0.03;
     }
