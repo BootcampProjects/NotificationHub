@@ -6,14 +6,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlackList {
+
+    private static BlackList blackList_instance = null;
+
+
     private List<BlackListCompanyDTO> blackListCompanies;
 
-    public BlackList() {
+    private BlackList() {
         blackListCompanies = new ArrayList<BlackListCompanyDTO>();
     }
 
-    public List<BlackListCompanyDTO> getCompanies() {
+    public static BlackList getInstance() {
+        if (blackList_instance == null)
+            blackList_instance = new BlackList();
+
+        return blackList_instance;
+    }
+
+    public List<BlackListCompanyDTO> getBlackListCompanies() {
         return blackListCompanies;
+    }
+
+    public void setBlackListCompanies(List<BlackListCompanyDTO> blackListCompanies) {
+        this.blackListCompanies = blackListCompanies;
     }
 
     public void addCompany(BlackListCompanyDTO blackListCompany) {

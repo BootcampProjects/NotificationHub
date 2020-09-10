@@ -23,7 +23,7 @@ public class PaymentValidation {
             return true;
         } else {
             BlackListCompanyDTO blackListCompanyDTO = new BlackListCompanyDTO(company.getId(), company.getName());
-            BlackList blackList = new BlackList(); // TODO : singleton
+            BlackList blackList = BlackList.getInstance();
             blackList.addCompany(blackListCompanyDTO);
             return false;
         }

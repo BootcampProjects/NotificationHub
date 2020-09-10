@@ -7,8 +7,10 @@ import org.kodluyoruz.trendyol.datastructure.EmailFixedPackage;
 import org.kodluyoruz.trendyol.datastructure.SmsElasticPackage;
 import org.kodluyoruz.trendyol.datastructure.SmsFixedPackage;
 import org.kodluyoruz.trendyol.model.*;
+import org.kodluyoruz.trendyol.model.dto.BlackListCompanyDTO;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class NotificationHubApp {
     public static void main(String[] args) {
@@ -68,5 +70,14 @@ public class NotificationHubApp {
         boolean result = PaymentValidation.CheckLastPaidInvoiceDate(company1);
 
         System.out.println(result);
+
+
+        BlackList blackList = BlackList.getInstance();
+        List<BlackListCompanyDTO> arrayList = blackList.getBlackListCompanies();
+
+        for (BlackListCompanyDTO blackListCompanyDTO : arrayList) {
+            System.out.println(blackListCompanyDTO.getCompanyName());
+        }
+
     }
 }
