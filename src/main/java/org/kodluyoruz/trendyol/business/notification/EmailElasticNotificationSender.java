@@ -17,7 +17,7 @@ public class EmailElasticNotificationSender implements ElasticNotificationSender
 
         boolean validContent = MessageContentValidation.CheckMessageContent(email);
 
-        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent);
+        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent(company.getLanguage()));
 
         if (company.getEmailPackage().limit > 0) {
             company.getEmailPackage().limit--;

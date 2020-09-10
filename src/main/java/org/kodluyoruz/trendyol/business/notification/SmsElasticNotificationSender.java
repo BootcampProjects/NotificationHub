@@ -17,7 +17,7 @@ public class SmsElasticNotificationSender implements ElasticNotificationSender {
 
         boolean validContent = MessageContentValidation.CheckMessageContent(sms);
 
-        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent);
+        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent(company.getLanguage()));
 
         if (company.getSmsPackage().limit > 0) {
             company.getSmsPackage().limit--;

@@ -17,7 +17,7 @@ public class EmailFixedNotificationSender implements FixedNotificationSender {
 
         boolean validContent = MessageContentValidation.CheckMessageContent(email);
 
-        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent);
+        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent(company.getLanguage()));
 
         if (company.getEmailPackage().limit <= 0) {
             System.out.printf("\n" + company.getName() + " - exceeded Email limit (FixedPackage)" +

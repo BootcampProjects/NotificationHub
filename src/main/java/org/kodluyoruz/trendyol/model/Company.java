@@ -14,31 +14,33 @@ import java.util.Random;
 public class Company {
     private int id;
     private String name;
+    private String language; // TR - EN
     private double invoice;
     private Date createdDate;
     private Date lastPaidInvoiceDate;
     private SmsPackage smsPackage;
     private EmailPackage emailPackage;
 
-    public Company(String name, SmsPackage smsPackage) {
-        createCompany(name, smsPackage);
+    public Company(String name, String language, SmsPackage smsPackage) {
+        createCompany(name, language, smsPackage);
         this.smsPackage = smsPackage;
     }
 
-    public Company(String name, EmailPackage emailPackage) {
-        createCompany(name, emailPackage);
+    public Company(String name, String language, EmailPackage emailPackage) {
+        createCompany(name, language, emailPackage);
         this.emailPackage = emailPackage;
     }
 
-    public Company(String name, SmsPackage smsPackage, EmailPackage emailPackage) {
-        createCompany(name, smsPackage, emailPackage);
+    public Company(String name, String language, SmsPackage smsPackage, EmailPackage emailPackage) {
+        createCompany(name, language, smsPackage, emailPackage);
         this.smsPackage = smsPackage;
         this.emailPackage = emailPackage;
     }
 
-    private void createCompany(String name, NotificationPackage... notificationPackages) {
+    private void createCompany(String name, String language, NotificationPackage... notificationPackages) {
         this.id = new Random().nextInt(99999);
         this.name = name;
+        this.language = language;
         this.createdDate = new Date();
         this.lastPaidInvoiceDate = new Date();
         this.invoice = 0;
@@ -61,6 +63,14 @@ public class Company {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public double getInvoice() {
@@ -134,6 +144,6 @@ public class Company {
         boolean validPayment = PaymentValidation.CheckLastPaidInvoiceDate(company);
 
         if (!validPayment)
-            throw new InvalidPaymentException(ErrorMessage.InvalidPayment);
+            throw new InvalidPaymentException(ErrorMessage.InvalidPayment(company.language));
     }
 }

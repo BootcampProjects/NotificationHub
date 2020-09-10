@@ -14,9 +14,12 @@ import java.util.List;
 
 public class NotificationHubApp {
     public static void main(String[] args) {
-        Company company1 = new Company("Comp1", new SmsElasticPackage());
-        Company company2 = new Company("Comp2", new EmailElasticPackage());
-        Company company3 = new Company("Comp3", new SmsFixedPackage(), new EmailFixedPackage());
+        String languageTR = "TR";
+        String languageEN = "EN";
+
+        Company company1 = new Company("Comp1", languageEN, new SmsElasticPackage());
+        Company company2 = new Company("Comp2", languageEN, new EmailElasticPackage());
+        Company company3 = new Company("Comp3", languageTR, new SmsFixedPackage(), new EmailFixedPackage());
 
         Sms sms1 = new Sms("Hi");
         Email email1 = new Email("Hello'", "Greeting");
@@ -37,8 +40,7 @@ public class NotificationHubApp {
 
         try {
             company2.SendEmail(email1, postGroup1);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 

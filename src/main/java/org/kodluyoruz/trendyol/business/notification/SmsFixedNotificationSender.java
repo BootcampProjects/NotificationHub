@@ -17,7 +17,7 @@ public class SmsFixedNotificationSender implements FixedNotificationSender {
 
         boolean validContent = MessageContentValidation.CheckMessageContent(sms);
 
-        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent);
+        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent(company.getLanguage()));
 
         if (company.getSmsPackage().limit <= 0) {
             System.out.printf("\n" + company.getName() + " - exceeded SMS limit (FixedPackage)" +
