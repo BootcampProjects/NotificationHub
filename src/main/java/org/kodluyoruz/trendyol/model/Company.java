@@ -1,8 +1,10 @@
 package org.kodluyoruz.trendyol.model;
 
+import org.kodluyoruz.trendyol.business.validation.PaymentValidation;
 import org.kodluyoruz.trendyol.datastructure.abstraction.EmailPackage;
 import org.kodluyoruz.trendyol.datastructure.abstraction.NotificationPackage;
 import org.kodluyoruz.trendyol.datastructure.abstraction.SmsPackage;
+import org.kodluyoruz.trendyol.exception.InvalidPaymentException;
 import org.kodluyoruz.trendyol.model.dto.NotificationSendDTO;
 
 import java.util.Date;
@@ -101,6 +103,7 @@ public class Company {
     }
 
     public void SendSms(Sms sms, PostGroup postGroup) {
+        BeforeCheckPayment(this);
         NotificationSendDTO notificationSendDTO = new NotificationSendDTO();
 
         for (User user : postGroup.getUsers()) {
@@ -114,6 +117,7 @@ public class Company {
     }
 
     public void SendEmail(Email email, PostGroup postGroup) {
+        BeforeCheckPayment(this);
         NotificationSendDTO notificationSendDTO = new NotificationSendDTO();
 
         for (User user : postGroup.getUsers()) {
@@ -125,4 +129,10 @@ public class Company {
         }
     }
 
+    private void BeforeCheckPayment(Company company) {
+        boolean validPayment = PaymentValidation.CheckLastPaidInvoiceDate(company);
+
+        if (!validPayment)
+            throw new InvalidPaymentException();
+    }
 }

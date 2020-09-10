@@ -16,14 +16,9 @@ public class SmsFixedNotificationSender implements FixedNotificationSender {
         Sms sms = (Sms) notificationSendDTO.getMessage();
         Company company = notificationSendDTO.getCompany();
 
-        boolean validPayment = PaymentValidation.CheckLastPaidInvoiceDate(company);
         boolean validContent = MessageContentValidation.CheckMessageContent(sms);
 
         if (!validContent) throw new InvalidMessageContentException();
-
-        if (!validPayment)
-            throw new InvalidPaymentException();
-
 
         if (company.getSmsPackage().limit <= 0) {
             System.out.printf("\n" + company.getName() + " - exceeded SMS limit (FixedPackage)" +
