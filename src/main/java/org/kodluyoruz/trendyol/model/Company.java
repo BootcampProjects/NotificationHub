@@ -72,6 +72,10 @@ public class Company {
         return createdDate;
     }
 
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
     public Date getLastPaidInvoiceDate() {
         return lastPaidInvoiceDate;
     }

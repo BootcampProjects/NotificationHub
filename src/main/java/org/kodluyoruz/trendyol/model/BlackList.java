@@ -1,15 +1,22 @@
 package org.kodluyoruz.trendyol.model;
 
+import org.kodluyoruz.trendyol.model.dto.BlackListCompanyDTO;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class BlackList {
-    private List<Company> companies;
+    private List<BlackListCompanyDTO> blackListCompanies;
 
-    public List<Company> getCompanies() {
-        return companies;
+    public BlackList() {
+        blackListCompanies = new ArrayList<BlackListCompanyDTO>();
     }
 
-    public void addCompany(Company company) {
-        this.companies.add(company);
+    public List<BlackListCompanyDTO> getCompanies() {
+        return blackListCompanies;
+    }
+
+    public void addCompany(BlackListCompanyDTO blackListCompany) {
+        this.blackListCompanies.add(blackListCompany);
     }
 }

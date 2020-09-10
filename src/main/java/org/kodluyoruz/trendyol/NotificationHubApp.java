@@ -1,11 +1,14 @@
 package org.kodluyoruz.trendyol;
 
 import org.kodluyoruz.trendyol.business.payment.InvoicePayment;
+import org.kodluyoruz.trendyol.business.validation.PaymentValidation;
 import org.kodluyoruz.trendyol.datastructure.EmailElasticPackage;
 import org.kodluyoruz.trendyol.datastructure.EmailFixedPackage;
 import org.kodluyoruz.trendyol.datastructure.SmsElasticPackage;
 import org.kodluyoruz.trendyol.datastructure.SmsFixedPackage;
 import org.kodluyoruz.trendyol.model.*;
+
+import java.util.Calendar;
 
 public class NotificationHubApp {
     public static void main(String[] args) {
@@ -54,6 +57,16 @@ public class NotificationHubApp {
         System.out.printf(company2.getName() + " - invoice : %.2f\n", company2.getInvoice());
         System.out.printf(company3.getName() + " - invoice : %.2f\n", company3.getInvoice());
 
+        System.out.println("\n\t*************\n");
 
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -4);
+
+        company1.setCreatedDate(cal.getTime());
+        company1.setLastPaidInvoiceDate(cal.getTime());
+
+        boolean result = PaymentValidation.CheckLastPaidInvoiceDate(company1);
+
+        System.out.println(result);
     }
 }
