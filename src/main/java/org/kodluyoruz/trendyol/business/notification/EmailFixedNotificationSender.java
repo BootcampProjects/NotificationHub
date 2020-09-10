@@ -1,6 +1,7 @@
 package org.kodluyoruz.trendyol.business.notification;
 
 import org.kodluyoruz.trendyol.business.notification.abstraction.FixedNotificationSender;
+import org.kodluyoruz.trendyol.business.validation.PaymentValidation;
 import org.kodluyoruz.trendyol.datastructure.EmailFixedPackage;
 import org.kodluyoruz.trendyol.model.Company;
 import org.kodluyoruz.trendyol.model.Email;
@@ -11,6 +12,11 @@ public class EmailFixedNotificationSender implements FixedNotificationSender {
     public void SendNotification(NotificationSendDTO notificationSendDTO) {
         Email email = (Email) notificationSendDTO.getMessage();
         Company company = notificationSendDTO.getCompany();
+
+        boolean validPayment = PaymentValidation.CheckLastPaidInvoiceDate(company);
+
+        if(!validPayment)
+            // exception
 
         if (company.getEmailPackage().limit <= 0) {
             System.out.printf("\n" + company.getName() + " - exceeded Email limit (FixedPackage)" +

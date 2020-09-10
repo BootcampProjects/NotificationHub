@@ -1,6 +1,7 @@
 package org.kodluyoruz.trendyol.business.notification;
 
 import org.kodluyoruz.trendyol.business.notification.abstraction.ElasticNotificationSender;
+import org.kodluyoruz.trendyol.business.validation.PaymentValidation;
 import org.kodluyoruz.trendyol.datastructure.SmsElasticPackage;
 import org.kodluyoruz.trendyol.model.Company;
 import org.kodluyoruz.trendyol.model.Sms;
@@ -11,6 +12,11 @@ public class SmsElasticNotificationSender implements ElasticNotificationSender {
     public void SendNotification(NotificationSendDTO notificationSendDTO) {
         Sms sms = (Sms) notificationSendDTO.getMessage();
         Company company = notificationSendDTO.getCompany();
+
+        boolean validPayment = PaymentValidation.CheckLastPaidInvoiceDate(company);
+
+        if(!validPayment)
+            // TODO : exception
 
         if (company.getSmsPackage().limit > 0) {
             company.getSmsPackage().limit--;
