@@ -4,6 +4,7 @@ import org.kodluyoruz.trendyol.business.notification.abstraction.FixedNotificati
 import org.kodluyoruz.trendyol.business.validation.MessageContentValidation;
 import org.kodluyoruz.trendyol.business.validation.PaymentValidation;
 import org.kodluyoruz.trendyol.datastructure.EmailFixedPackage;
+import org.kodluyoruz.trendyol.exception.InvalidMessageContentException;
 import org.kodluyoruz.trendyol.exception.InvalidPaymentException;
 import org.kodluyoruz.trendyol.model.Company;
 import org.kodluyoruz.trendyol.model.Email;
@@ -19,7 +20,7 @@ public class EmailFixedNotificationSender implements FixedNotificationSender {
         boolean validContent = MessageContentValidation.CheckMessageContent(email);
 
         if (!validContent)
-            // exception
+            throw new InvalidMessageContentException();
 
         if (!validPayment)
             throw new InvalidPaymentException();

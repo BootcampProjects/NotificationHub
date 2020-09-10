@@ -4,6 +4,7 @@ import org.kodluyoruz.trendyol.business.notification.abstraction.ElasticNotifica
 import org.kodluyoruz.trendyol.business.validation.MessageContentValidation;
 import org.kodluyoruz.trendyol.business.validation.PaymentValidation;
 import org.kodluyoruz.trendyol.datastructure.SmsElasticPackage;
+import org.kodluyoruz.trendyol.exception.InvalidMessageContentException;
 import org.kodluyoruz.trendyol.exception.InvalidPaymentException;
 import org.kodluyoruz.trendyol.model.Company;
 import org.kodluyoruz.trendyol.model.Sms;
@@ -19,7 +20,7 @@ public class SmsElasticNotificationSender implements ElasticNotificationSender {
         boolean validContent = MessageContentValidation.CheckMessageContent(sms);
 
         if (!validContent)
-            // exception
+            throw new InvalidMessageContentException();
 
         if (!validPayment)
             throw new InvalidPaymentException();

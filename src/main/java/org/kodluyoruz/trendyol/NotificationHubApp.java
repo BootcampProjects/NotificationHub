@@ -19,7 +19,7 @@ public class NotificationHubApp {
         Company company3 = new Company("Comp3", new SmsFixedPackage(), new EmailFixedPackage());
 
         Sms sms1 = new Sms("Hi");
-        Email email1 = new Email("Hello", "Greeting");
+        Email email1 = new Email("Hello'", "Greeting");
 
         User user1 = new User("user1");
         User user2 = new User("user2");
@@ -35,7 +35,12 @@ public class NotificationHubApp {
 
         System.out.println("\n\t*************\n");
 
-        company2.SendEmail(email1, postGroup1);
+        try {
+            company2.SendEmail(email1, postGroup1);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
 
         System.out.println("\n\t*************\n");
 
