@@ -2,6 +2,7 @@ package org.kodluyoruz.trendyol.business.notification;
 
 import org.kodluyoruz.trendyol.business.notification.abstraction.ElasticNotificationSender;
 import org.kodluyoruz.trendyol.business.validation.MessageContentValidation;
+import org.kodluyoruz.trendyol.constant.ErrorMessage;
 import org.kodluyoruz.trendyol.datastructure.SmsElasticPackage;
 import org.kodluyoruz.trendyol.exception.InvalidMessageContentException;
 import org.kodluyoruz.trendyol.model.Company;
@@ -16,7 +17,7 @@ public class SmsElasticNotificationSender implements ElasticNotificationSender {
 
         boolean validContent = MessageContentValidation.CheckMessageContent(sms);
 
-        if (!validContent) throw new InvalidMessageContentException();
+        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent);
 
         if (company.getSmsPackage().limit > 0) {
             company.getSmsPackage().limit--;

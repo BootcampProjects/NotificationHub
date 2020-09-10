@@ -39,7 +39,7 @@ public class NotificationHubApp {
             company2.SendEmail(email1, postGroup1);
         }
         catch (Exception e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
         System.out.println("\n\t*************\n");
@@ -68,7 +68,7 @@ public class NotificationHubApp {
 
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
         System.out.println();

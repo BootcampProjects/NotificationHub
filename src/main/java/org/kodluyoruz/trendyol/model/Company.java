@@ -1,6 +1,7 @@
 package org.kodluyoruz.trendyol.model;
 
 import org.kodluyoruz.trendyol.business.validation.PaymentValidation;
+import org.kodluyoruz.trendyol.constant.ErrorMessage;
 import org.kodluyoruz.trendyol.datastructure.abstraction.EmailPackage;
 import org.kodluyoruz.trendyol.datastructure.abstraction.NotificationPackage;
 import org.kodluyoruz.trendyol.datastructure.abstraction.SmsPackage;
@@ -133,6 +134,6 @@ public class Company {
         boolean validPayment = PaymentValidation.CheckLastPaidInvoiceDate(company);
 
         if (!validPayment)
-            throw new InvalidPaymentException();
+            throw new InvalidPaymentException(ErrorMessage.InvalidPayment);
     }
 }

@@ -2,6 +2,7 @@ package org.kodluyoruz.trendyol.business.notification;
 
 import org.kodluyoruz.trendyol.business.notification.abstraction.FixedNotificationSender;
 import org.kodluyoruz.trendyol.business.validation.MessageContentValidation;
+import org.kodluyoruz.trendyol.constant.ErrorMessage;
 import org.kodluyoruz.trendyol.datastructure.EmailFixedPackage;
 import org.kodluyoruz.trendyol.exception.InvalidMessageContentException;
 import org.kodluyoruz.trendyol.model.Company;
@@ -16,7 +17,7 @@ public class EmailFixedNotificationSender implements FixedNotificationSender {
 
         boolean validContent = MessageContentValidation.CheckMessageContent(email);
 
-        if (!validContent) throw new InvalidMessageContentException();
+        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent);
 
         if (company.getEmailPackage().limit <= 0) {
             System.out.printf("\n" + company.getName() + " - exceeded Email limit (FixedPackage)" +
