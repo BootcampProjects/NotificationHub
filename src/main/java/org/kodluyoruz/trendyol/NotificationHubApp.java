@@ -42,6 +42,10 @@ public class NotificationHubApp {
 
         System.out.println("\n\t*************\n");
 
+        System.out.println(company3.getName() + " - SMS package validity date : " + company3.getSmsPackage().validityDate);
+
+        System.out.println("\n\t*************\n");
+
         InvoicePayment.PayInvoice(company1);
 
         System.out.println("\n\t*************\n");
