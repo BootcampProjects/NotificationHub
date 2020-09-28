@@ -2,12 +2,12 @@ package org.kodluyoruz.trendyol.business.notification;
 
 import org.kodluyoruz.trendyol.business.notification.abstraction.FixedNotificationSender;
 import org.kodluyoruz.trendyol.business.validation.MessageContentValidation;
-import org.kodluyoruz.trendyol.constant.ErrorMessage;
-import org.kodluyoruz.trendyol.datastructure.SmsFixedPackage;
-import org.kodluyoruz.trendyol.exception.InvalidMessageContentException;
-import org.kodluyoruz.trendyol.model.Company;
-import org.kodluyoruz.trendyol.model.Sms;
-import org.kodluyoruz.trendyol.model.dto.NotificationSendDTO;
+import org.kodluyoruz.trendyol.constants.ErrorMessage;
+import org.kodluyoruz.trendyol.datastructures.SmsFixedPackage;
+import org.kodluyoruz.trendyol.exceptions.InvalidMessageContentException;
+import org.kodluyoruz.trendyol.models.Company;
+import org.kodluyoruz.trendyol.models.Sms;
+import org.kodluyoruz.trendyol.models.dtos.NotificationSendDTO;
 
 public class SmsFixedNotificationSender implements FixedNotificationSender {
     @Override

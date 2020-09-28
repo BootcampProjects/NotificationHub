@@ -1,10 +1,9 @@
 package org.kodluyoruz.trendyol.business.notification;
 
-import com.sun.tools.javac.util.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.kodluyoruz.trendyol.datastructure.EmailElasticPackage;
-import org.kodluyoruz.trendyol.model.*;
+import org.kodluyoruz.trendyol.datastructures.EmailElasticPackage;
+import org.kodluyoruz.trendyol.models.*;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 

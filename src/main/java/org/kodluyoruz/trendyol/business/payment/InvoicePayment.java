@@ -1,6 +1,6 @@
 package org.kodluyoruz.trendyol.business.payment;
 
-import org.kodluyoruz.trendyol.model.Company;
+import org.kodluyoruz.trendyol.models.Company;
 
 import java.util.Date;
 

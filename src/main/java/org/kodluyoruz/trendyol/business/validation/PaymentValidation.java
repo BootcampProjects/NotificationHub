@@ -1,8 +1,8 @@
 package org.kodluyoruz.trendyol.business.validation;
 
-import org.kodluyoruz.trendyol.model.BlackList;
-import org.kodluyoruz.trendyol.model.Company;
-import org.kodluyoruz.trendyol.model.dto.BlackListCompanyDTO;
+import org.kodluyoruz.trendyol.models.BlackList;
+import org.kodluyoruz.trendyol.models.Company;
+import org.kodluyoruz.trendyol.models.dtos.BlackListCompanyDTO;
 
 import java.util.Calendar;
 import java.util.Date;

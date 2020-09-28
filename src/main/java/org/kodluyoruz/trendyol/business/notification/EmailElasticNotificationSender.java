@@ -2,12 +2,12 @@ package org.kodluyoruz.trendyol.business.notification;
 
 import org.kodluyoruz.trendyol.business.notification.abstraction.ElasticNotificationSender;
 import org.kodluyoruz.trendyol.business.validation.MessageContentValidation;
-import org.kodluyoruz.trendyol.constant.ErrorMessage;
-import org.kodluyoruz.trendyol.datastructure.EmailElasticPackage;
-import org.kodluyoruz.trendyol.exception.InvalidMessageContentException;
-import org.kodluyoruz.trendyol.model.Company;
-import org.kodluyoruz.trendyol.model.Email;
-import org.kodluyoruz.trendyol.model.dto.NotificationSendDTO;
+import org.kodluyoruz.trendyol.constants.ErrorMessage;
+import org.kodluyoruz.trendyol.datastructures.EmailElasticPackage;
+import org.kodluyoruz.trendyol.exceptions.InvalidMessageContentException;
+import org.kodluyoruz.trendyol.models.Company;
+import org.kodluyoruz.trendyol.models.Email;
+import org.kodluyoruz.trendyol.models.dtos.NotificationSendDTO;
 
 public class EmailElasticNotificationSender implements ElasticNotificationSender {
     @Override

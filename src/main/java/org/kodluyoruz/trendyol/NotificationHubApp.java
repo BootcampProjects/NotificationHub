@@ -2,12 +2,12 @@ package org.kodluyoruz.trendyol;
 
 import org.kodluyoruz.trendyol.business.payment.InvoicePayment;
 import org.kodluyoruz.trendyol.business.validation.PaymentValidation;
-import org.kodluyoruz.trendyol.datastructure.EmailElasticPackage;
-import org.kodluyoruz.trendyol.datastructure.EmailFixedPackage;
-import org.kodluyoruz.trendyol.datastructure.SmsElasticPackage;
-import org.kodluyoruz.trendyol.datastructure.SmsFixedPackage;
-import org.kodluyoruz.trendyol.model.*;
-import org.kodluyoruz.trendyol.model.dto.BlackListCompanyDTO;
+import org.kodluyoruz.trendyol.datastructures.EmailElasticPackage;
+import org.kodluyoruz.trendyol.datastructures.EmailFixedPackage;
+import org.kodluyoruz.trendyol.datastructures.SmsElasticPackage;
+import org.kodluyoruz.trendyol.datastructures.SmsFixedPackage;
+import org.kodluyoruz.trendyol.models.*;
+import org.kodluyoruz.trendyol.models.dtos.BlackListCompanyDTO;
 
 import java.util.Calendar;
 import java.util.List;
