@@ -11,13 +11,13 @@ import org.kodluyoruz.trendyol.models.dtos.NotificationSendDTO;
 
 public class EmailElasticNotificationSender implements ElasticNotificationSender {
     @Override
-    public void SendNotification(NotificationSendDTO notificationSendDTO) {
+    public void sendNotification(NotificationSendDTO notificationSendDTO) {
         Email email = (Email) notificationSendDTO.getMessage();
         Company company = notificationSendDTO.getCompany();
 
-        boolean validContent = MessageContentValidation.CheckMessageContent(email);
+        boolean validContent = MessageContentValidation.checkMessageContent(email);
 
-        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent(company.getLanguage()));
+        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.invalidMessageContent(company.getLanguage()));
 
         if (company.getEmailPackage().limit > 0) {
             company.getEmailPackage().limit--;

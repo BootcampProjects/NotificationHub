@@ -11,19 +11,19 @@ import org.kodluyoruz.trendyol.models.dtos.NotificationSendDTO;
 
 public class EmailFixedNotificationSender implements FixedNotificationSender {
     @Override
-    public void SendNotification(NotificationSendDTO notificationSendDTO) {
+    public void sendNotification(NotificationSendDTO notificationSendDTO) {
         Email email = (Email) notificationSendDTO.getMessage();
         Company company = notificationSendDTO.getCompany();
 
-        boolean validContent = MessageContentValidation.CheckMessageContent(email);
+        boolean validContent = MessageContentValidation.checkMessageContent(email);
 
-        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent(company.getLanguage()));
+        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.invalidMessageContent(company.getLanguage()));
 
         if (company.getEmailPackage().limit <= 0) {
             System.out.printf("\n" + company.getName() + " - exceeded Email limit (FixedPackage)" +
                     " - current invoice : %.2f \n", company.getInvoice());
 
-            DefineExtraPackage(company);
+            defineExtraPackage(company);
         }
         company.getEmailPackage().limit--;
 
@@ -34,7 +34,7 @@ public class EmailFixedNotificationSender implements FixedNotificationSender {
     }
 
     @Override
-    public void DefineExtraPackage(Company company) {
+    public void defineExtraPackage(Company company) {
         EmailFixedPackage emailFixedPackage = (EmailFixedPackage) company.getEmailPackage();
 
         company.getEmailPackage().limit = emailFixedPackage.limitExcessExtraLimit;

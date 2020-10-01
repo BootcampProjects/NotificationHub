@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class PaymentValidation {
-    public static boolean CheckLastPaidInvoiceDate(Company company) {
+    public static boolean checkLastPaidInvoiceDate(Company company) {
 
         Date dateNow = new Date();
 

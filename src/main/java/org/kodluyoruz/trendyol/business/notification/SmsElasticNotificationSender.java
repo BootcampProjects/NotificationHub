@@ -11,13 +11,13 @@ import org.kodluyoruz.trendyol.models.dtos.NotificationSendDTO;
 
 public class SmsElasticNotificationSender implements ElasticNotificationSender {
     @Override
-    public void SendNotification(NotificationSendDTO notificationSendDTO) {
+    public void sendNotification(NotificationSendDTO notificationSendDTO) {
         Sms sms = (Sms) notificationSendDTO.getMessage();
         Company company = notificationSendDTO.getCompany();
 
-        boolean validContent = MessageContentValidation.CheckMessageContent(sms);
+        boolean validContent = MessageContentValidation.checkMessageContent(sms);
 
-        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent(company.getLanguage()));
+        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.invalidMessageContent(company.getLanguage()));
 
         if (company.getSmsPackage().limit > 0) {
             company.getSmsPackage().limit--;

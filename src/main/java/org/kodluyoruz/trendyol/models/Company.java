@@ -41,6 +41,33 @@ public class Company {
         this.emailPackage = emailPackage;
     }
 
+    public void sendSms(Sms sms, PostGroup postGroup) {
+        beforeCheckPayment();
+        NotificationSendDTO notificationSendDTO = new NotificationSendDTO();
+
+        for (User user : postGroup.getUsers()) {
+            notificationSendDTO.setCompany(this);
+            notificationSendDTO.setMessage(sms);
+            notificationSendDTO.setUserName(user.getName());
+
+            smsPackage.notificationSender.sendNotification(notificationSendDTO);
+        }
+
+    }
+
+    public void sendEmail(Email email, PostGroup postGroup) {
+        beforeCheckPayment();
+        NotificationSendDTO notificationSendDTO = new NotificationSendDTO();
+
+        for (User user : postGroup.getUsers()) {
+            notificationSendDTO.setCompany(this);
+            notificationSendDTO.setMessage(email);
+            notificationSendDTO.setUserName(user.getName());
+
+            emailPackage.notificationSender.sendNotification(notificationSendDTO);
+        }
+    }
+
     private void createCompany(String name, int language, NotificationPackage... notificationPackages) {
         this.id = new Random().nextInt(99999);
         this.name = name;
@@ -57,37 +84,10 @@ public class Company {
         System.out.printf(this.name + " - invoice : %.2f \n\n", this.invoice);
     }
 
-    public void SendSms(Sms sms, PostGroup postGroup) {
-        BeforeCheckPayment(this);
-        NotificationSendDTO notificationSendDTO = new NotificationSendDTO();
-
-        for (User user : postGroup.getUsers()) {
-            notificationSendDTO.setCompany(this);
-            notificationSendDTO.setMessage(sms);
-            notificationSendDTO.setUserName(user.getName());
-
-            smsPackage.notificationSender.SendNotification(notificationSendDTO);
-        }
-
-    }
-
-    public void SendEmail(Email email, PostGroup postGroup) {
-        BeforeCheckPayment(this);
-        NotificationSendDTO notificationSendDTO = new NotificationSendDTO();
-
-        for (User user : postGroup.getUsers()) {
-            notificationSendDTO.setCompany(this);
-            notificationSendDTO.setMessage(email);
-            notificationSendDTO.setUserName(user.getName());
-
-            emailPackage.notificationSender.SendNotification(notificationSendDTO);
-        }
-    }
-
-    private void BeforeCheckPayment(Company company) {
-        boolean validPayment = PaymentValidation.CheckLastPaidInvoiceDate(company);
+    private void beforeCheckPayment() {
+        boolean validPayment = PaymentValidation.checkLastPaidInvoiceDate(this);
 
         if (!validPayment)
-            throw new InvalidPaymentException(ErrorMessage.InvalidPayment(company.language));
+            throw new InvalidPaymentException(ErrorMessage.invalidPayment(this.language));
     }
 }

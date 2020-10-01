@@ -11,19 +11,19 @@ import org.kodluyoruz.trendyol.models.dtos.NotificationSendDTO;
 
 public class SmsFixedNotificationSender implements FixedNotificationSender {
     @Override
-    public void SendNotification(NotificationSendDTO notificationSendDTO) {
+    public void sendNotification(NotificationSendDTO notificationSendDTO) {
         Sms sms = (Sms) notificationSendDTO.getMessage();
         Company company = notificationSendDTO.getCompany();
 
-        boolean validContent = MessageContentValidation.CheckMessageContent(sms);
+        boolean validContent = MessageContentValidation.checkMessageContent(sms);
 
-        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.InvalidMessageContent(company.getLanguage()));
+        if (!validContent) throw new InvalidMessageContentException(ErrorMessage.invalidMessageContent(company.getLanguage()));
 
         if (company.getSmsPackage().limit <= 0) {
             System.out.printf("\n" + company.getName() + " - exceeded SMS limit (FixedPackage)" +
                     " - current invoice : %.2f \n", company.getInvoice());
 
-            DefineExtraPackage(company);
+            defineExtraPackage(company);
         }
         company.getSmsPackage().limit--;
 
@@ -34,7 +34,7 @@ public class SmsFixedNotificationSender implements FixedNotificationSender {
     }
 
     @Override
-    public void DefineExtraPackage(Company company) {
+    public void defineExtraPackage(Company company) {
         SmsFixedPackage smsFixedPackage = (SmsFixedPackage) company.getSmsPackage();
 
         company.getSmsPackage().limit = smsFixedPackage.limitExcessExtraLimit;

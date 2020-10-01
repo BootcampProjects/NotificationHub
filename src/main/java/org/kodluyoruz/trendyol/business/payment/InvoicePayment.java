@@ -5,7 +5,7 @@ import org.kodluyoruz.trendyol.models.Company;
 import java.util.Date;
 
 public class InvoicePayment {
-    public static void PayInvoice(Company company) {
+    public static void payInvoice(Company company) {
         System.out.printf(company.getName() + " - invoice : %.2f \n", company.getInvoice());
         company.setInvoice(0);
         company.setLastPaidInvoiceDate(new Date());

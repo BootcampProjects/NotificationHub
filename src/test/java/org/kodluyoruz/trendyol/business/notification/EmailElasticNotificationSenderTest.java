@@ -48,7 +48,7 @@ public class EmailElasticNotificationSenderTest {
 
     @Test
     public void it_should_success() {
-        company1.SendEmail(email1, postGroup1);
+        company1.sendEmail(email1, postGroup1);
 
         assertThat(company1.getEmailPackage().limit).isEqualTo(1996);
     }

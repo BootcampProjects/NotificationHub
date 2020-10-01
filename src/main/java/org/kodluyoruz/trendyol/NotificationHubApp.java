@@ -34,12 +34,12 @@ public class NotificationHubApp {
         postGroup1.addUsers(user1, user2, user3, user4);
         postGroup2.addUsers(user2, user4);
 
-        company1.SendSms(sms1, postGroup1);
+        company1.sendSms(sms1, postGroup1);
 
         System.out.println("\n\t*************\n");
 
         try {
-            company2.SendEmail(email1, postGroup1);
+            company2.sendEmail(email1, postGroup1);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -52,7 +52,7 @@ public class NotificationHubApp {
         company3.setCreatedDate(cal.getTime());
         company3.setLastPaidInvoiceDate(cal.getTime());
 
-        boolean result = PaymentValidation.CheckLastPaidInvoiceDate(company3);
+        boolean result = PaymentValidation.checkLastPaidInvoiceDate(company3);
 
         System.out.println(result);
 
@@ -65,8 +65,8 @@ public class NotificationHubApp {
         }
 
         try {
-            company3.SendEmail(email1, postGroup1);
-            company3.SendSms(sms1, postGroup2);
+            company3.sendEmail(email1, postGroup1);
+            company3.sendSms(sms1, postGroup2);
 
 
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class NotificationHubApp {
 
         System.out.println("\n\t*************\n");
 
-        InvoicePayment.PayInvoice(company1);
+        InvoicePayment.payInvoice(company1);
 
         System.out.println("\n\t*************\n");
 
