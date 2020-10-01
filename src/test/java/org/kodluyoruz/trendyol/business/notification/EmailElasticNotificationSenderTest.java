@@ -3,9 +3,12 @@ package org.kodluyoruz.trendyol.business.notification;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kodluyoruz.trendyol.datastructures.EmailElasticPackage;
-import org.kodluyoruz.trendyol.models.*;
+import org.kodluyoruz.trendyol.models.Company;
+import org.kodluyoruz.trendyol.models.Email;
+import org.kodluyoruz.trendyol.models.PostGroup;
+import org.kodluyoruz.trendyol.models.User;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class EmailElasticNotificationSenderTest {
 
@@ -23,8 +26,8 @@ public class EmailElasticNotificationSenderTest {
 
     @BeforeEach
     public void setUp() {
-        String languageTR = "TR";
-        String languageEN = "EN";
+        int languageTR = 1;
+        int languageEN = 2;
 
         company1 = new Company("Comp1", languageEN, new EmailElasticPackage());
         company2 = new Company("Comp2", languageTR, new EmailElasticPackage());

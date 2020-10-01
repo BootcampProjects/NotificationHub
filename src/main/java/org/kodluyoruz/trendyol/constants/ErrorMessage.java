@@ -2,21 +2,23 @@ package org.kodluyoruz.trendyol.constants;
 
 public class ErrorMessage {
 
-    public static String InvalidPayment(String language) {
-        if (language == "TR") {
-            return "Geçersiz Ödeme Hatası";
-        } else if (language == "EN")
-            return "Invalid Payment Error";
+    private static final String[] InvalidPaymentErrorMessage = {
+            "Invalid Payment",
+            "Geçersiz Ödeme Hatası",
+            "Invalid Payment Error"
+    };
 
-        else return "Invalid Payment";
+    private static final String[] InvalidMessageContentErrorMessage = {
+            "Invalid Message Content",
+            "Geçersiz Mesaj İçeriği Hatası",
+            "Invalid Message Content Error"
+    };
+
+    public static String InvalidPayment(int language) {
+        return InvalidPaymentErrorMessage[language];
     }
 
-    public static String InvalidMessageContent(String language) {
-        if (language == "TR") {
-            return "Geçersiz Message İçeriği Hatası";
-        } else if (language == "EN")
-            return "Invalid Message Content Error";
-
-        else return "Invalid Message Content";
+    public static String InvalidMessageContent(int language) {
+        return InvalidMessageContentErrorMessage[language];
     }
 }

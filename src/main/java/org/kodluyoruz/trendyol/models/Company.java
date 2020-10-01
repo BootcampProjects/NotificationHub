@@ -18,30 +18,30 @@ import java.util.Random;
 public class Company {
     private int id;
     private String name;
-    private String language; // TR - EN
+    private int language; // 0 -> default / 1 -> TR / 2 -> EN
     private double invoice;
     private Date createdDate;
     private Date lastPaidInvoiceDate;
     private SmsPackage smsPackage;
     private EmailPackage emailPackage;
 
-    public Company(String name, String language, SmsPackage smsPackage) {
+    public Company(String name, int language, SmsPackage smsPackage) {
         createCompany(name, language, smsPackage);
         this.smsPackage = smsPackage;
     }
 
-    public Company(String name, String language, EmailPackage emailPackage) {
+    public Company(String name, int language, EmailPackage emailPackage) {
         createCompany(name, language, emailPackage);
         this.emailPackage = emailPackage;
     }
 
-    public Company(String name, String language, SmsPackage smsPackage, EmailPackage emailPackage) {
+    public Company(String name, int language, SmsPackage smsPackage, EmailPackage emailPackage) {
         createCompany(name, language, smsPackage, emailPackage);
         this.smsPackage = smsPackage;
         this.emailPackage = emailPackage;
     }
 
-    private void createCompany(String name, String language, NotificationPackage... notificationPackages) {
+    private void createCompany(String name, int language, NotificationPackage... notificationPackages) {
         this.id = new Random().nextInt(99999);
         this.name = name;
         this.language = language;

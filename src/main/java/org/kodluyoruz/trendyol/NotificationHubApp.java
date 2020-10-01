@@ -14,8 +14,8 @@ import java.util.List;
 
 public class NotificationHubApp {
     public static void main(String[] args) {
-        String languageTR = "TR";
-        String languageEN = "EN";
+        int languageTR = 1;
+        int languageEN = 2;
 
         Company company1 = new Company("Comp1", languageEN, new SmsElasticPackage());
         Company company2 = new Company("Comp2", languageEN, new EmailElasticPackage());
