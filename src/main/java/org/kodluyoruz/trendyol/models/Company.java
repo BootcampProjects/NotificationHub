@@ -1,5 +1,7 @@
 package org.kodluyoruz.trendyol.models;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.kodluyoruz.trendyol.business.validation.PaymentValidation;
 import org.kodluyoruz.trendyol.constants.ErrorMessage;
 import org.kodluyoruz.trendyol.datastructures.abstraction.EmailPackage;
@@ -11,6 +13,8 @@ import org.kodluyoruz.trendyol.models.dtos.NotificationSendDTO;
 import java.util.Date;
 import java.util.Random;
 
+@Getter
+@Setter
 public class Company {
     private int id;
     private String name;
@@ -51,66 +55,6 @@ public class Company {
 
         System.out.println(this.name + " company id : " + this.id);
         System.out.printf(this.name + " - invoice : %.2f \n\n", this.invoice);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public double getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(double invoice) {
-        this.invoice = invoice;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getLastPaidInvoiceDate() {
-        return lastPaidInvoiceDate;
-    }
-
-    public void setLastPaidInvoiceDate(Date lastPaidInvoiceDate) {
-        this.lastPaidInvoiceDate = lastPaidInvoiceDate;
-    }
-
-    public NotificationPackage getSmsPackage() {
-        return smsPackage;
-    }
-
-    public void setSmsPackage(SmsPackage smsPackage) {
-        this.smsPackage = smsPackage;
-    }
-
-    public NotificationPackage getEmailPackage() {
-        return emailPackage;
-    }
-
-    public void setEmailPackage(EmailPackage emailPackage) {
-        this.emailPackage = emailPackage;
     }
 
     public void SendSms(Sms sms, PostGroup postGroup) {

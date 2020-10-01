@@ -1,20 +1,19 @@
 package org.kodluyoruz.trendyol.models;
 
-import java.util.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+@Getter
+@Setter
 public class PostGroup {
     private List<User> users;
 
-    public PostGroup(){
-        users = new ArrayList<User>();
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public PostGroup() {
+        users = new ArrayList<>();
     }
 
     public void addUser(User user) {
@@ -22,8 +21,6 @@ public class PostGroup {
     }
 
     public void addUsers(User... users) {
-        for (User user : users) {
-            this.users.add(user);
-        }
+        Collections.addAll(this.users, users);
     }
 }
