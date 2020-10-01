@@ -1,34 +1,16 @@
 package org.kodluyoruz.trendyol.models.dtos;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.kodluyoruz.trendyol.models.Company;
 import org.kodluyoruz.trendyol.models.Message;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class NotificationSendDTO {
     private Company company;
     private Message message;
     private String userName;
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public Message getMessage() {
-        return message;
-    }
-
-    public void setMessage(Message message) {
-        this.message = message;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }
