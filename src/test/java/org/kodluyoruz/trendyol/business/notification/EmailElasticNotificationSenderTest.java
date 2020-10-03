@@ -3,53 +3,99 @@ package org.kodluyoruz.trendyol.business.notification;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kodluyoruz.trendyol.datastructures.EmailElasticPackage;
+import org.kodluyoruz.trendyol.exceptions.InvalidMessageContentException;
 import org.kodluyoruz.trendyol.models.Company;
 import org.kodluyoruz.trendyol.models.Email;
-import org.kodluyoruz.trendyol.models.PostGroup;
-import org.kodluyoruz.trendyol.models.User;
+import org.kodluyoruz.trendyol.models.dtos.NotificationSendDTO;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class EmailElasticNotificationSenderTest {
 
-    Company company1;
-    Company company2;
-    Email email1;
-    Email email_error;
-    User user1;
-    User user2;
-    User user3;
-    User user4;
-    PostGroup postGroup1;
-    PostGroup postGroup2;
-
+    EmailElasticNotificationSender sut = new EmailElasticNotificationSender();
+    NotificationSendDTO notificationSendDTO;
+    Company company;
+    Email email;
 
     @BeforeEach
     public void setUp() {
-        int languageTR = 1;
-        int languageEN = 2;
+        company = new Company("Comp1", 0, new EmailElasticPackage());
 
-        company1 = new Company("Comp1", languageEN, new EmailElasticPackage());
-        company2 = new Company("Comp2", languageTR, new EmailElasticPackage());
+        email = new Email("Hello", "Greeting");
 
-        email1 = new Email("Hello", "Greeting");
-        email_error = new Email("Hello'", "Greeting");
-
-        user1 = new User("user1");
-        user2 = new User("user2");
-        user3 = new User("user3");
-        user4 = new User("user4");
-
-        postGroup1 = new PostGroup();
-        postGroup2 = new PostGroup();
-        postGroup1.addUsers(user1, user2, user3, user4);
-        postGroup2.addUsers(user2, user4);
+        notificationSendDTO = new NotificationSendDTO();
+        notificationSendDTO.setCompany(company);
+        notificationSendDTO.setMessage(email);
+        notificationSendDTO.setUserName("userTest");
     }
 
     @Test
-    public void it_should_success() {
-        company1.sendEmail(email1, postGroup1);
+    public void sendNotification_WhenSentEmail_ShouldDecreaseEmailLimit() {
+        // Arrange
+        // defined at beforeEach
 
-        assertThat(company1.getEmailPackage().limit).isEqualTo(1996);
+        // Act
+        sut.sendNotification(notificationSendDTO);
+
+        // Assert
+        assertThat(company.getEmailPackage().limit).isEqualTo(1999);
+    }
+
+    @Test
+    public void sendNotification_WhenEmailLimitExceeded_ShouldAddUnitPriceToInvoice() {
+        // Arrange
+        // defined at beforeEach
+        company.getEmailPackage().limit = 0;
+
+        // Act
+        sut.sendNotification(notificationSendDTO);
+
+        // Assert
+        assertThat(company.getEmailPackage().limit).isEqualTo(0);
+        assertThat(company.getInvoice()).isEqualTo(7.53);
+    }
+
+    @Test
+    public void sendNotification_WhenEmailLimitExceeded_ShouldAddUnitPriceToInvoiceForEachEmail() {
+        // Arrange
+        // defined at beforeEach
+        company.getEmailPackage().limit = 0;
+
+        // Act
+        sut.sendNotification(notificationSendDTO);
+        sut.sendNotification(notificationSendDTO);
+        sut.sendNotification(notificationSendDTO);
+        sut.sendNotification(notificationSendDTO);
+
+        // Assert
+        assertThat(company.getEmailPackage().limit).isEqualTo(0);
+        assertThat(company.getInvoice()).isEqualTo(7.620000000000001);
+    }
+
+    @Test
+    public void sendNotification_WhenInvalidEmail_ShouldThrowInvalidMessageContentException() {
+        // Arrange
+        // defined at beforeEach
+        email = new Email("Hello' A", "InvalidContentTest");
+        notificationSendDTO.setMessage(email);
+
+        // Act
+        Throwable throwable = catchThrowable(() -> sut.sendNotification(notificationSendDTO));
+
+        // Assert
+        assertThat(throwable).isInstanceOf(InvalidMessageContentException.class).hasMessage("Invalid Message Content");
+    }
+
+    @Test
+    public void addUnitPriceToInvoice_TrueStory() {
+        // Arrange
+        // defined at beforeEach
+
+        // Act
+        sut.addUnitPriceToInvoice(company);
+
+        // Assert
+        assertThat(company.getInvoice()).isEqualTo(7.53);
     }
 }
